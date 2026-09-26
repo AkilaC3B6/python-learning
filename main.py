@@ -26,3 +26,5 @@ print("Master")
 print("Master change after feature")
 print("Hello from GitHub")
 print("Practicing Pull Request")
+from utilities import add
+print(add(34,295))

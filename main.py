@@ -31,3 +31,9 @@ print(add(34,295))
 print("Remote change for fetch practice")
 print("Hello from Git Hooks")
 print("Practicing GitHub pull request review workflow")
+def validate_number(value):
+    if not isinstance(value, (int, float)):
+        raise ValueError("Input must be a number")
+    return True
+
+print(validate_number(100))

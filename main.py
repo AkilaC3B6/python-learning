@@ -29,3 +29,5 @@ print("Practicing Pull Request")
 from utilities import add
 print(add(34,295))
 print("Remote change for fetch practice")
+print("Hello from Git Hooks")
+print("PR review practice")

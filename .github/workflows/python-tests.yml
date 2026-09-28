@@ -44,7 +44,7 @@ jobs:
           echo "Secret is available: ${{ secrets.PRACTICE_SECRET != '' }}"
           echo "Secret value: $PRACTICE_SECRET"
 
-      - name: Check Test Environment
+      - name: Check Test Environment Approval
         env:
           TEST_MESSAGE: ${{ secrets.TEST_MESSAGE }}
         run: |

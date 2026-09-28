@@ -40,5 +40,5 @@ jobs:
         env:
           PRACTICE_SECRET: ${{ secrets.PRACTICE_SECRET }}
         run:
-          echo "Secret is available: ${{ secrets.PRACTICE_SECRET != ''}}"
+          echo "Secret is available: ${{ secrets.PRACTICE_SECRET != '' }}"
           echo "Secret value: $PRACTICE_SECRET"

@@ -12,6 +12,7 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
+    environment: test
 
     steps:
 
@@ -42,3 +43,10 @@ jobs:
         run: |
           echo "Secret is available: ${{ secrets.PRACTICE_SECRET != '' }}"
           echo "Secret value: $PRACTICE_SECRET"
+
+      - name: Check Test Environment
+        env:
+          TEST_MESSAGE: ${{ secrets.TEST_MESSAGE }}
+        run: |
+          echo "Environment secret is available: ${{ secrets.TEST_MESSAGE != '' }}"
+          echo "Environment message: $TEST_MESSAGE"

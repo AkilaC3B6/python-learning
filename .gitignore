@@ -2,3 +2,5 @@
 .idea/
 __pycache__/
 *.pyc
+report.html
+.pytest_cache/

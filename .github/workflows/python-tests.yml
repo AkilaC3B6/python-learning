@@ -1,0 +1,52 @@
+name: Python Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    environment: test
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python
+        run: python -m pytest --html=report.html --self-contained-html
+
+      - name: Upload Pytest report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report
+          path: report.html
+
+      - name: Check GitHub Secret
+        env:
+          PRACTICE_SECRET: ${{ secrets.PRACTICE_SECRET }}
+        run: |
+          echo "Secret is available: ${{ secrets.PRACTICE_SECRET != '' }}"
+          echo "Secret value: $PRACTICE_SECRET"
+
+      - name: Check Test Environment Approval
+        env:
+          TEST_MESSAGE: ${{ secrets.TEST_MESSAGE }}
+        run: |
+          echo "Environment secret is available: ${{ secrets.TEST_MESSAGE != '' }}"
+          echo "Environment message: $TEST_MESSAGE"

@@ -14,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
 
+    env:
+      B2B_USERNAME: ${{ secrets.B2B_USERNAME }}
+      B2B_PASSWORD: ${{ secrets.B2B_PASSWORD }}
+
     steps:
 
       - name: Checkout repository
@@ -26,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install Playwright browser
+        run: python -m playwright install --with-deps chromium
 
       - name: Run Python
         run: python -m pytest --html=report.html --self-contained-html
@@ -42,11 +49,9 @@ jobs:
           PRACTICE_SECRET: ${{ secrets.PRACTICE_SECRET }}
         run: |
           echo "Secret is available: ${{ secrets.PRACTICE_SECRET != '' }}"
-          echo "Secret value: $PRACTICE_SECRET"
 
       - name: Check Test Environment Approval
         env:
           TEST_MESSAGE: ${{ secrets.TEST_MESSAGE }}
         run: |
           echo "Environment secret is available: ${{ secrets.TEST_MESSAGE != '' }}"
-          echo "Environment message: $TEST_MESSAGE"

@@ -1,4 +1,6 @@
 import os
+import time
+
 import pytest
 from dotenv import load_dotenv
 from pathlib import Path
@@ -20,6 +22,11 @@ def test_button_click(page):
         screenshot_dir = Path("screenshots")
         screenshot_dir.mkdir(exist_ok=True)
         page.goto("https://b2bconnect-staging.mercedes-benz.com/de")
+        page.wait_for_timeout(8000)
+        accept_all_button = page.locator("//button[contains(@id,'accept-all')]")
+        if accept_all_button.count() > 0:
+                accept_all_button.click()
+                expect(accept_all_button).to_be_hidden(timeout=10000)
         login_button = page.locator("button[id*='header-login-login']")
         page.screenshot(path=str(screenshot_dir / "01_homepage.png"))
         expect(login_button).to_be_visible()
